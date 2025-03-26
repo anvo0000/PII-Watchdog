@@ -8,7 +8,6 @@ class PiiDetection:
     """
     # Class-level configuration for Bedrock
     BEDROCK_SERVICE = "bedrock-runtime"
-    BEDROCK_REGION = "us-west-2"
     DEFAULT_MODEL_ID = "anthropic.claude-3-5-sonnet-20241022-v2:0"
 
     def __init__(self,
@@ -96,53 +95,3 @@ class PiiDetection:
             return response_body['content'][0]['text']
         except Exception as error_msg:
             raise error_msg
-
-
-
-
-# Check
-# user_text1 = """Craft messaging that resonates by blending content and technology
-#     Build trust through transparency to power smarter personalization
-#     Leverage AI as your copilot to create lasting customer connections - and Speaker lineup
-#     Jarrett Wong - jarrett.wong@braze.com, address WA9826 """
-
-# user_text1="This is excellent course for beginners to kick-start with GenAI journey in AWS. The compilation of sections are perfect and Alex Dan has good teaching skills to explain the concepts from the scratch."
-# agent = PiiDetection(user_text1, is_detail=True)
-# result = agent.detect_pii()
-# print(result)
-
-# Quick Check
-# Yes
-# Personal Information found:
-# - Name: Jarrett Wong
-# - Email: jarrett.wong@braze.com
-# - Address code/number: WA9826
-
-
-###Detail check and Recommendation
-# PII DETECTION RESULT:
-# - Total PII Elements Found: 3
-#
-# - Specific PII Breakdown:
-#   1. Name PII: YES (Details: "Jarrett Wong")
-#   2. Email PII: YES (Details: "jarrett.wong@braze.com")
-#   3. Contact PII: YES (Details: Address reference "WA9826")
-#   4. Professional PII: YES (Association with business email domain "braze.com")
-#
-# PRIVACY RISK ASSESSMENT:
-# - Risk Level: HIGH
-# - Recommended Action: REDACT
-#
-# Detailed Findings:
-# 1. Full name and professional identity exposed
-# 2. Direct business email contact information revealed
-# 3. Partial address/identifier present
-# 4. Professional affiliation can be determined through email domain
-#
-# Recommendations:
-# 1. Redact or anonymize the email address
-# 2. Remove or obscure the full name
-# 3. Remove address reference
-# 4. Consider using generic role descriptions instead of specific identifiers
-#
-# Note: The combination of multiple PII elements (name + email + address) creates a higher risk profile as these can be used together for identity verification or potential misuse.
